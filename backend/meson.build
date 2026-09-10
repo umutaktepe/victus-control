@@ -21,6 +21,15 @@ backend_fan_support_test = executable(
 
 test('backend-fan-support', backend_fan_support_test)
 
+backend_fan_curve_test = executable(
+  'backend-fan-curve-test',
+  sources: ['tests/fan_curve_test.cpp', 'src/fan.cpp', 'src/fan.hpp', 'src/util.cpp', 'src/util.hpp', 'src/validation.cpp', 'src/validation.hpp'],
+  include_directories: include_directories('src'),
+  dependencies: [dependency('threads')],
+  install: false)
+
+test('backend-fan-curve', backend_fan_curve_test)
+
 install_data(
 	'victus-backend.service',
 	install_dir: '/etc/systemd/system'

@@ -36,3 +36,7 @@ std::string restore_firmware_fan_control();
 
 std::string ensure_better_auto_mode();
 void shutdown_fan_controller();
+
+// Helper functions for Better Auto curve computation with hysteresis
+int temp_level_from_temperature(double temp, int previous_level);
+int compute_better_auto_level(double temp_c, double usage_pct, int previous_level);

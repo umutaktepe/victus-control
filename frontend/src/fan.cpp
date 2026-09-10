@@ -22,7 +22,7 @@ struct FanLabelUpdate {
 } // namespace
 
 // Constants for manual fan control
-const int MIN_RPM = 2000;
+const int MIN_RPM = 2600;
 const int FAN1_MAX_RPM = 5800;
 const int FAN2_MAX_RPM = 6100;
 const int RPM_STEPS = 8;
