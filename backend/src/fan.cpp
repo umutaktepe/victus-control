@@ -895,7 +895,7 @@ static void better_auto_worker()
             if (cooldown_level > kBetterAutoCooldownLevel) {
                 // Step down from intense-heat floor to moderate floor
                 cooldown_level = kBetterAutoCooldownLevel;
-                cooldown_until = now + std::chrono::seconds(20);
+                cooldown_until = now + std::chrono::seconds(15);
             } else {
                 cooldown_level = 0;
                 cooldown_until = std::chrono::steady_clock::time_point::min();
