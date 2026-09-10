@@ -961,8 +961,7 @@ static void better_auto_worker()
         // For intense heat (Level 7-8), floor is Level 6 (or Level 7 if at Level 8)
         // with an active window that protects against sudden spikes.
         if (sensor_level >= 7) {
-            int high_floor = (sensor_level >= 8) ? 7 : 6;
-            cooldown_level = std::max(cooldown_level, high_floor);
+            cooldown_level = std::max(cooldown_level, sensor_level);
             cooldown_until = now + std::chrono::seconds(45);
         } else if (sensor_level >= kBetterAutoCooldownLevel) {
             cooldown_level = std::max(cooldown_level, kBetterAutoCooldownLevel);
