@@ -72,7 +72,8 @@ static constexpr int kBetterAutoSteps = 8;
 static constexpr std::chrono::seconds kBetterAutoTick{2};
 static constexpr std::chrono::seconds kBetterAutoReapply{90};
 static constexpr int kBetterAutoCooldownLevel = 5;
-static constexpr std::chrono::seconds kBetterAutoCooldown{90};
+static constexpr std::chrono::seconds kBetterAutoCooldown{15};
+static constexpr std::chrono::seconds kBetterAutoHighHeatCooldown{30};
 static constexpr std::chrono::seconds kFanApplyGap{10};
 static constexpr const char *kSudoPath = "/usr/bin/sudo";
 static constexpr const char *kFanModeHelperPath = "/usr/bin/set-fan-mode.sh";
@@ -895,7 +896,7 @@ static void better_auto_worker()
             if (cooldown_level > kBetterAutoCooldownLevel) {
                 // Step down from intense-heat floor to moderate floor
                 cooldown_level = kBetterAutoCooldownLevel;
-                cooldown_until = now + std::chrono::seconds(15);
+                cooldown_until = now + kBetterAutoCooldown;
             } else {
                 cooldown_level = 0;
                 cooldown_until = std::chrono::steady_clock::time_point::min();
@@ -962,7 +963,7 @@ static void better_auto_worker()
         // with an active window that protects against sudden spikes.
         if (sensor_level >= 7) {
             cooldown_level = std::max(cooldown_level, sensor_level);
-            cooldown_until = now + std::chrono::seconds(30);
+            cooldown_until = now + kBetterAutoHighHeatCooldown;
         } else if (sensor_level >= kBetterAutoCooldownLevel) {
             cooldown_level = std::max(cooldown_level, kBetterAutoCooldownLevel);
             cooldown_until = now + kBetterAutoCooldown;
