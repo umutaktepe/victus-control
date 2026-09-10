@@ -172,8 +172,8 @@ class ThermalSensors:
                 timeout=1
             )
             if res.returncode == 0 and res.stdout.strip():
-                out = res.stdout.strip().lower()
-                return "active" in out
+                parts = [p.strip().lower() for p in res.stdout.strip().split(",")]
+                return any(p == "active" for p in parts)
         except Exception:
             pass
         return False
